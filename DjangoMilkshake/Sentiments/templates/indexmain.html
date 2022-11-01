@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+<!-- <html>
+    <head>
+        <title>Home</title>
+    </head>
+    <body>
+		<form method="get" action="{% url 'get-sentiments' %}" style="margin: 0">
+			<input  id="search_box" type="text" name="search"  placeholder="Search..." >
+			<button id="search_submit" type="submit" >Submit</button>
+		</form>
+    </body>
+</html> -->
+
+{% block js %}Home{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4">
+            <div class="card card-chart">
+                <div class="card-header card-header-danger">
+                <div class="ct-chart" style="text-align: center">
+                    Bar Chart
+                </div>
+                </div>
+                <div class="card-body">
+                <h4 class="card-title">Sales Analysis Via Tweets</h4>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-4">
+            <div class="card">
+          
+            </div>
+            <div class="col-lg-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-danger">
+                    <div class="ct-chart" style="text-align: center">
+                        Pie Chart
+                    </div>
+                    </div>
+                    <div class="card-body">
+                    <h4 class="card-title">Tweet Analysis</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="row">
+            <div class="col-12" id="twitter">
+                <div class="card">
+                    <div class="card-header card-header-tabs card-header-warning">
+                        Tweets
+                    </div>
+                    <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="profile">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>Handle</th>
+                                    <th>Tweet</th>
+                                    <th>subjectivity</th>
+                                    <th>sentiment</th>
+                                    <th>language</th>
+                                </tr>
+                            {% for tweet in public_tweets %}
+                                <tr>
+                                    <td><b>@{{tweet.tweet.user.screen_name}}</b></td>
+                                    <td>{{tweet.tweet.full_text}}</td>
+                                    <td>{{tweet.subjectivity}}</td>
+                                    <td>{{tweet.senti_analysis}}</td>
+                                    <td>{{tweet.tweet.lang}}</td>
+                                </tr>
+                            {% endfor %}
+                                </div>
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-12" id="news">
+                <div class="card">
+                    <div class="card-header card-header-tabs card-header-success">
+                        News
+                    </div>
+                    <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="profile">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>Source, Time</th>
+                                    <th>News</th>
+                                    <th>Sentiment</th>
+                                </tr>
+                                {% for analysis in full_analysis %}
+                                    <tr>
+                                        <td><b>{{analysis.source}}</b></td>
+                                        <td>{{analysis.text}}</td>
+                                        <td>{{analysis.senti_analysis}}</td>
+                                    </tr>
+                                {% endfor %}
+                                </div>
+                            </tbody>
+                        </table>
+                    </div>
+                    </div> <br>  <br>  <br>  <br>  <br>
+                    <center></center>  <br>  <br>  <br>
+                </div>
+                </div>
+</div>
+
+{% endblock %}
